@@ -62,7 +62,6 @@ class PlgSystemSocialmetatags extends JPlugin
             $profile_facebook   = $profile->socialmetatags['facebook'];
 
             $user               = JFactory::getUser($article->created_by);
-            $username           = 
             $realname           = $user->name;
 
             if(!$description)
