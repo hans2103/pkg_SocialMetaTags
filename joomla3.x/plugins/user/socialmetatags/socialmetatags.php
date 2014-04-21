@@ -149,7 +149,12 @@ class plgUserSocialmetatags extends JPlugin
                     $tuples[] = '(' . $userId . ', ' . $db->quote('socialmetatags.' . $k) . ', ' . $db->quote($v) . ', ' . $order++ . ')';
                 }
 
-                $db->setQuery('INSERT INTO #__user_profiles VALUES ' . implode(', ', $tuples));
+                $query = $db->getQuery(true);
+                $query
+                    ->insert($db->quoteName('#__user_profiles'))
+                    ->values(implode(',', $tuples));
+                $db->setQuery($query);
+                
 
                 if (!$db->execute())
                 {
