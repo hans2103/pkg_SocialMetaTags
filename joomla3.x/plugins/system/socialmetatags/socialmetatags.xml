@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_SOCIALMETATAGS</name>
+    <author>Hans Kuijpers</author>
+    <creationDate>April 2014</creationDate>
+    <copyright>Copyright (C) 2014 Hans Kuijpers</copyright>
+    <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
+    <authorEmail>info@hkweb.nl</authorEmail>
+    <authorUrl>http://www.hkweb.nl/</authorUrl>
+    <version>1.0</version>
+    <description>PLG_SYSTEM_SOCIALMETATAGS_DESC</description>
+    <files>
+        <filename plugin="socialmetatags">socialmetatags.php</filename>
+        <filename>index.html</filename>
+    </files>
+    <languages>
+        <language tag="en-GB">en-GB.plg_system_socialmetatags.ini</language>
+        <language tag="en-GB">en-GB.plg_system_socialmetatags.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field 
+                    type="spacer"
+                    name="smtbasicintro"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_BASIC_INTRO" />
+                <field
+                    name="placelocationlatitude"
+                    type="text"
+                    default=""
+                    label="SMT_PLACELOCATIONLATITUDE_LABEL"
+                    description="SMT_PLACELOCATIONLATITUDE_DESC" />
+                <field
+                    name="placelocationlongitude"
+                    type="text"
+                    default=""
+                    label="SMT_PLACELOCATIONLONGITUDE_LABEL"
+                    description="SMT_PLACELOCATIONLONGITUDE_DESC" />
+                <field
+                    name="businesscontentdatastreetaddress"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATASTREETADDRESS_LABEL"
+                    description="SMT_BUSINESSCONTENTDATASTREETADDRESS_DESC" />
+                <field
+                    name="businesscontentdatalocality"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATALOCALITY_LABEL"
+                    description="SMT_BUSINESSCONTENTDATALOCALITY_DESC" />
+                <field
+                    name="businesscontentdatapostalcode"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATAPOSTALCODE_LABEL"
+                    description="SMT_BUSINESSCONTENTDATAPOSTALCODE_DESC" />
+                <field
+                    name="businesscontentdatacountryname"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATACOUNTRYLABEL"
+                    description="SMT_BUSINESSCONTENTDATACOUNTRY_DESC" />
+                <field
+                    name="businesscontentdataemail"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATAEMAIL_LABEL"
+                    description="SMT_BUSINESSCONTENTDATAEMAIL_DESC" />
+                <field
+                    name="businesscontentdataphonenumber"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATAPHONE_LABEL"
+                    description="SMT_BUSINESSCONTENTDATAPHONE_DESC" />
+                <field
+                    name="businesscontactdatawebsite"
+                    type="text"
+                    default=""
+                    label="SMT_BUSINESSCONTENTDATAWEBSITE_LABEL"
+                    description="SMT_BUSINESSCONTENTDATAWEBSITE_DESC" />
+                <field
+                    name="basicimage"
+                    type="text"
+                    default=""
+                    label="SMT_BASICIMAGE_LABEL"
+                    description="SMT_BASICIMAGE_DESC" />
+            </fieldset>
+
+            <fieldset name="Googleplus">
+                <field 
+                    type="spacer"
+                    name="smtgoogleplusintro"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_GOOGLEPLUS_INTRO" />
+                <field
+                    name="googlepluspublisher"
+                    type="text"
+                    default=""
+                    label="SMT_GOOGLEPLUSPUBLISHER_LABEL"
+                    description="SMT_GOOGLEPLUSPUBLISHER_DESC" />
+                <field 
+                    type="spacer"
+                    name="smtgoogleplusextra"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_GOOGLEPLUS_EXTRA" />
+            </fieldset>
+
+            <fieldset name="Facebook">
+                <field 
+                    type="spacer"
+                    name="smtfacebookintro"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_FACEBOOK_INTRO" />
+                <field
+                    name="fbadmin"
+                    type="text"
+                    default=""
+                    label="SMT_FACEBOOKADMIN_LABEL"
+                    description="SMT_FACEBOOKADMIN_DESC" />
+                <field 
+                    type="spacer"
+                    name="smtfacebookextra"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_FACEBOOK_EXTRA" />
+            </fieldset>
+
+            <fieldset name="Twitter">
+                <field 
+                    type="spacer"
+                    name="smttwitterintro"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_TWITTER_INTRO" />
+                <field
+                    name="twittersite"
+                    type="text"
+                    default=""
+                    label="SMT_TWITTERSITE_LABEL"
+                    description="SMT_TWITTERSITE_DESC" />
+                <field 
+                    type="spacer"
+                    name="smttwitterextra"
+                    class="text"
+                    label="PLG_SYSTEM_SOCIALMETATAG_TWITTER_EXTRA" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

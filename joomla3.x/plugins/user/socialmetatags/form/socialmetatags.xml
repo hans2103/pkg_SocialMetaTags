@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="socialmetatags">
+        <fieldset name="socialmetatags"
+            label="PLG_USER_SOCIALMETATAGS_OPTIONS_LABEL"
+        >
+            <field
+                name="googleplus"
+                type="text"
+                id="googleplus"
+                description="PLG_USER_SOCIALMETATAGS_FIELD_GOOGLEPLUS_DESC"
+                filter="string"
+                label="PLG_USER_SOCIALMETATAGS_FIELD_GOOGLEPLUS_LABEL"
+                message="PLG_USER_SOCIALMETATAGS_FIELD_GOOGLEPLUS_MESSAGE"
+                required="false"
+                readonly="false"
+                default=""
+            />
+
+            <field
+                name="twitter"
+                type="text"
+                id="twitter"
+                description="PLG_USER_SOCIALMETATAGS_FIELD_TWITTER_DESC"
+                filter="string"
+                label="PLG_USER_SOCIALMETATAGS_FIELD_TWITTER_LABEL"
+                message="PLG_USER_SOCIALMETATAGS_FIELD_TWITTER_MESSAGE"
+                required="false"
+                readonly="false"
+                default=""
+            />
+
+            <field
+                name="facebook"
+                type="text"
+                id="facebook"
+                description="PLG_USER_SOCIALMETATAGS_FIELD_FACEBOOK_DESC"
+                filter="string"
+                label="PLG_USER_SOCIALMETATAGS_FIELD_FACEBOOK_LABEL"
+                message="PLG_USER_SOCIALMETATAGS_FIELD_FACEBOOK_MESSAGE"
+                required="false"
+                readonly="false"
+                default=""
+            />
+        </fieldset>
+    </fields>
+</form>
