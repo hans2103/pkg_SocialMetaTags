@@ -10,21 +10,14 @@ defined('_JEXEC') or die;
 
 class plgUserSocialmetatags extends JPlugin
 {
-
     /**
-     * Constructor
+     * Load the language file on instantiation. Note this is only available in Joomla 3.1 and higher.
+     * If you want to support 3.0 series you must override the constructor
      *
-     * @access      protected
-     * @param       object  $subject The object to observe
-     * @param       array   $config  An array that holds the plugin configuration
-     * @since       1.5
+     * @var    boolean
+     * @since  3.1
      */
-    public function __construct(& $subject, $config)
-    {
-        parent::__construct($subject, $config);
-
-        $this->loadLanguage();
-    }
+    protected $autoloadLanguage = true;
 
     /**
      * @param   string  $context    The context for the data
