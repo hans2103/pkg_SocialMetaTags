@@ -147,6 +147,7 @@ class plgUserSocialmetatags extends JPlugin
                     ->insert($db->quoteName('#__user_profiles'))
                     ->values(implode(',', $tuples));
                 $db->setQuery($query);
+                $db->query();
                 
 
                 if (!$db->execute())
