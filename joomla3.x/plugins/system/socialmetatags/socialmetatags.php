@@ -153,7 +153,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->addCustomTag('<meta name="'.$key.'" content="'.$value.'" >');
+                $doc->setMetaData($key,$value);
             }
         }
     }
