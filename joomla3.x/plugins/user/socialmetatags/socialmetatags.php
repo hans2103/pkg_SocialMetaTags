@@ -26,7 +26,7 @@ class plgUserSocialmetatags extends JPlugin
      *
      * @return    boolean
      */
-    function onContentPrepareData($context, $data)
+    public function onContentPrepareData($context, $data)
     {
         // Check we are manipulating a valid form.
         if (!in_array($context, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
@@ -90,7 +90,7 @@ class plgUserSocialmetatags extends JPlugin
      *
      * @return    boolean
      */
-    function onContentPrepareForm($form, $data)
+    public function onContentPrepareForm($form, $data)
     {
 
         if (!($form instanceof JForm))
@@ -114,7 +114,7 @@ class plgUserSocialmetatags extends JPlugin
         return true;
     }
 
-    function onUserAfterSave($data, $isNew, $result, $error)
+    public function onUserAfterSave($data, $isNew, $result, $error)
     {
         $userId = JArrayHelper::getValue($data, 'id', 0, 'int');
 
@@ -175,7 +175,7 @@ class plgUserSocialmetatags extends JPlugin
      * @param   boolean $success    True if user was succesfully stored in the database
      * @param   string  $msg        Message
      */
-    function onUserAfterDelete($user, $success, $msg)
+    public function onUserAfterDelete($user, $success, $msg)
     {
         if (!$success)
         {
