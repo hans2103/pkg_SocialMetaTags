@@ -19,13 +19,14 @@ class PlgSystemSocialmetatags extends JPlugin
      */
     protected $autoloadLanguage = true;
 
-    function onBeforeRender()
+    public function onBeforeRender()
     {
         // Connect to Joomla
         $app            = JFactory::getApplication();
         $doc            = JFactory::getDocument();
 
-        if ($app->isAdmin()) {
+        if ($app->isAdmin())
+        {
             return;
         }
 
@@ -132,20 +133,26 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:see_also'] = $url_site;
         $metaproperty['fb:admins'] = $fbAdmin;
 
-        foreach ($metaproperty as $key => $value) {
-            if ($value) {
+        foreach ($metaproperty as $key => $value)
+        {
+            if ($value)
+            {
                 $doc->addCustomTag('<meta property="'.$key.'" content="'.$value.'" >');
             }
         }
 
-        foreach ($metaitemprop as $key => $value) {
-            if ($value) {
+        foreach ($metaitemprop as $key => $value)
+        {
+            if ($value)
+            {
                 $doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" >');
             }
         }
 
-        foreach ($metaname as $key => $value) {
-            if ($value) {
+        foreach ($metaname as $key => $value)
+        {
+            if ($value)
+            {
                 $doc->addCustomTag('<meta name="'.$key.'" content="'.$value.'" >');
             }
         }
