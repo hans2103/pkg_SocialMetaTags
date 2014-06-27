@@ -83,6 +83,9 @@ class PlgSystemSocialmetatags extends JPlugin
             {
                 $basicimage = $url_site.$images->image_intro;
             }
+
+            $publishedtime  = $article->created;
+            $modifiedtime  = $article->modified;
         }
 
         // Set Meta Tags
@@ -132,6 +135,9 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:site_name'] = $sitename;
         $metaproperty['og:see_also'] = $url_site;
         $metaproperty['fb:admins'] = $fbAdmin;
+        $metaproperty['article:published_time'] = $publishedtime;
+        $metaproperty['article:modified_time'] = $modifiedtime;
+        $metaproperty['og:updated_time'] = $modifiedtime;
 
         foreach ($metaproperty as $key => $value)
         {
