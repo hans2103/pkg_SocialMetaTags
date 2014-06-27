@@ -124,15 +124,15 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaname['twitter:image:src'] = $basicimage;
 
         // Meta Tags for Facebook
-        $metaproperty['og:type'] = $ogtype;
-        $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
-        $metaproperty['profile:last_name'] = $realname;
-        $metaproperty['profile:username'] = $profile_facebook;
         $metaproperty['og:title'] = $title;
-        $metaproperty['og:description'] = $description;
+        $metaproperty['og:type'] = $ogtype;
         $metaproperty['og:image'] = $basicimage;
         $metaproperty['og:url'] = $url;
         $metaproperty['og:site_name'] = $sitename;
+        $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
+        $metaproperty['profile:last_name'] = $realname;
+        $metaproperty['profile:username'] = $profile_facebook;
+        $metaproperty['og:description'] = $description;
         $metaproperty['og:see_also'] = $url_site;
         $metaproperty['fb:admins'] = $fbAdmin;
         $metaproperty['article:published_time'] = $publishedtime;
@@ -143,7 +143,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->addCustomTag('<meta property="'.$key.'" content="'.$value.'" >');
+                $doc->addCustomTag('<meta property="'.$key.'" content="'.$value.'" />');
             }
         }
 
@@ -151,7 +151,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" >');
+                $doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" />');
             }
         }
 
