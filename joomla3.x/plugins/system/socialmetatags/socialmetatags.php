@@ -24,16 +24,24 @@ class PlgSystemSocialmetatags extends JPlugin
         // Connect to Joomla
         $app            = JFactory::getApplication();
         $doc            = JFactory::getDocument();
+        $option         = $app->input->getCmd('option', '');
+        $view           = $app->input->getCmd('view', '');
+        $id             = $app->input->getCmd('id', '');
+        $format         = $app->input->getCmd('format', '');
 
+        // Don't run on Joomla backend
         if ($app->isAdmin())
+        {
+            return;
+        }
+        
+        // Don't execute on RSS feed
+        if ($format == 'feed')
         {
             return;
         }
 
         // Detecting Active Variables
-        $option         = $app->input->getCmd('option', '');
-        $view           = $app->input->getCmd('view', '');
-        $id             = $app->input->getCmd('id', '');
         $sitename       = $app->getCfg('sitename');
         $description    = $doc->getDescription();
         $url_site       = JURI::base();
