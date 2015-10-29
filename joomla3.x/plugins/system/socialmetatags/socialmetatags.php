@@ -72,12 +72,28 @@ class PlgSystemSocialmetatags extends JPlugin
 
             $user               = JFactory::getUser($article->created_by);
             $realname           = $user->name;
+            
+            $descriptiontw		='';
+            $descriptionfb		='';
 
             if(!$description)
             {
                 $description    = trim(htmlspecialchars(strip_tags($article->introtext)));
+            	$descriptiontw	= substr($descriptiontw, 0, 160);
                 $doc->setDescription($description);
             }
+
+			if (!$descriptiontw)
+			{
+				$descriptiontw	= trim(htmlspecialchars(strip_tags($article->introtext)));
+				$descriptiontw	= substr($descriptiontw, 0, 140);
+			}
+
+			if (!$descriptionfb)
+			{
+				$descriptionfb	= trim(htmlspecialchars(strip_tags($article->introtext)));
+				$descriptionfb	= substr($descriptionfb, 0, 300);
+			}
 
             $url                = key($doc->_links); // Key of first element form this array contains the canonical url
             $ogtype             = 'article';
@@ -128,7 +144,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaname['twitter:site'] = $params->get('twittersite');
         $metaname['twitter:creator'] = $profile_twitter;
         $metaname['twitter:title'] = $title;
-        $metaname['twitter:description'] = $description;
+        $metaname['twitter:description'] = $descriptiontw;
         $metaname['twitter:image:src'] = $basicimage;
 
         // Meta Tags for Facebook
@@ -140,7 +156,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
         $metaproperty['profile:last_name'] = $realname;
         $metaproperty['profile:username'] = $profile_facebook;
-        $metaproperty['og:description'] = $description;
+        $metaproperty['og:description'] = $descriptionfb;
         $metaproperty['og:see_also'] = $url_site;
         $metaproperty['fb:admins'] = $fbAdmin;
         $metaproperty['article:published_time'] = $publishedtime;
