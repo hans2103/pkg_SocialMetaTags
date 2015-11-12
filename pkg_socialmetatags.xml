@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.2" method="upgrade">
+  <name>SocialMetaTags Package</name>
+  <author>Hans Kuijpers</author>
+  <creationDate>April 2014</creationDate>
+  <packagename>socialmetatags</packagename>
+  <version>1.2.0</version>
+  <url>http://www.yoururl.com/</url>
+  <packager>Hans Kuijpers</packager>
+  <packagerurl>http://www.hkweb.nl/</packagerurl>
+  <description>
+    <![CDATA[
+     Implement Social Meta Tags for Google+, Facebook and Twitter.
+    ]]>
+  </description>
+
+  <files folder="packages">
+    <file type="plugin" id="socialmetatags" group="system">plg_system_socialmetatags</file>
+    <file type="plugin" id="socialmetatags" group="user">plg_user_socialmetatags</file>>
+  </files>
+</extension>
