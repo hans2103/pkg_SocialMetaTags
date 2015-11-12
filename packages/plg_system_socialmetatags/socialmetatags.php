@@ -34,7 +34,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             return;
         }
-        
+
         // Don't execute on RSS feed
         if ($format == 'feed')
         {
@@ -56,7 +56,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $fbAdmin        = $params->get('fbadmin');
 
         // Component specific overrides
-        if ($menu->getActive() == $menu->getDefault()) 
+        if ($menu->getActive() == $menu->getDefault())
         {
             // overrides for homepage
         }
@@ -72,7 +72,7 @@ class PlgSystemSocialmetatags extends JPlugin
 
             $user               = JFactory::getUser($article->created_by);
             $realname           = $user->name;
-            
+
             $descriptiontw		='';
             $descriptionfb		='';
 

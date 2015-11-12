@@ -13,14 +13,14 @@
         <filename plugin="socialmetatags">socialmetatags.php</filename>
         <filename>index.html</filename>
     </files>
-    <languages>
-        <language tag="en-GB">en-GB.plg_system_socialmetatags.ini</language>
-        <language tag="en-GB">en-GB.plg_system_socialmetatags.sys.ini</language>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_system_socialmetatags.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_system_socialmetatags.sys.ini</language>
     </languages>
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field 
+                <field
                     type="spacer"
                     name="smtbasicintro"
                     class="text"
@@ -88,7 +88,7 @@
             </fieldset>
 
             <fieldset name="Googleplus">
-                <field 
+                <field
                     type="spacer"
                     name="smtgoogleplusintro"
                     class="text"
@@ -99,7 +99,7 @@
                     default=""
                     label="SMT_GOOGLEPLUSPUBLISHER_LABEL"
                     description="SMT_GOOGLEPLUSPUBLISHER_DESC" />
-                <field 
+                <field
                     type="spacer"
                     name="smtgoogleplusextra"
                     class="text"
@@ -107,7 +107,7 @@
             </fieldset>
 
             <fieldset name="Facebook">
-                <field 
+                <field
                     type="spacer"
                     name="smtfacebookintro"
                     class="text"
@@ -118,7 +118,7 @@
                     default=""
                     label="SMT_FACEBOOKADMIN_LABEL"
                     description="SMT_FACEBOOKADMIN_DESC" />
-                <field 
+                <field
                     type="spacer"
                     name="smtfacebookextra"
                     class="text"
@@ -126,7 +126,7 @@
             </fieldset>
 
             <fieldset name="Twitter">
-                <field 
+                <field
                     type="spacer"
                     name="smttwitterintro"
                     class="text"
@@ -137,7 +137,7 @@
                     default=""
                     label="SMT_TWITTERSITE_LABEL"
                     description="SMT_TWITTERSITE_DESC" />
-                <field 
+                <field
                     type="spacer"
                     name="smttwitterextra"
                     class="text"

@@ -9,13 +9,15 @@
     <authorUrl>http://www.hkweb.nl/</authorUrl>
     <version>1.0</version>
     <description>PLG_USER_SOCIALMETATAGS_DESC</description>
+
     <files>
         <filename plugin="socialmetatags">socialmetatags.php</filename>
         <filename>index.html</filename>
         <folder>form</folder>
     </files>
-    <languages>
-        <language tag="en-GB">en-GB.plg_user_socialmetatags.ini</language>
-        <language tag="en-GB">en-GB.plg_user_socialmetatags.sys.ini</language>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_user_socialmetatags.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_user_socialmetatags.sys.ini</language>
     </languages>
 </extension>
