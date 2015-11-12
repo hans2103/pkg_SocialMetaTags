@@ -18,4 +18,9 @@
     <file type="plugin" id="socialmetatags" group="system">plg_system_socialmetatags</file>
     <file type="plugin" id="socialmetatags" group="user">plg_user_socialmetatags</file>>
   </files>
+
+  <updateservers>
+    <server type="collection" priority="1" name="SocialMetaTags Update Server">https://raw.github.com/hans2103/pkg_socialmetatags/update/list.xml</server>
+    <server type="extension" priority="1" name="SocialMetaTags Update Server">http://raw.github.com/hans2103/pkg_socialmetatags/update/pkg_socialmetatags.xml</server>
+  </updateservers>
 </extension>
