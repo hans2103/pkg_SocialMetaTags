@@ -73,29 +73,33 @@ class PlgSystemSocialmetatags extends JPlugin
             $user               = JFactory::getUser($article->created_by);
             $realname           = $user->name;
 
-            $descriptiontw		='';
-            $descriptionfb		='';
+            $descriptiontw      ='';
+            $descriptionfb      ='';
 
             if(!$description)
             {
                 $description    = trim(htmlspecialchars(strip_tags($article->introtext)));
-            	$descriptiontw	= substr($descriptiontw, 0, 160);
+                $descriptiontw  = substr($descriptiontw, 0, 160);
                 $doc->setDescription($description);
             }
 
-			if (!$descriptiontw)
-			{
-				$descriptiontw	= trim(htmlspecialchars(strip_tags($article->introtext)));
-				$descriptiontw	= substr($descriptiontw, 0, 140);
-			}
+            if (!$descriptiontw)
+            {
+              $descriptiontw    = trim(htmlspecialchars(strip_tags($article->introtext)));
+              $descriptiontw    = substr($descriptiontw, 0, 140);
+            }
 
-			if (!$descriptionfb)
-			{
-				$descriptionfb	= trim(htmlspecialchars(strip_tags($article->introtext)));
-				$descriptionfb	= substr($descriptionfb, 0, 300);
-			}
+            if (!$descriptionfb)
+            {
+              $descriptionfb    = trim(htmlspecialchars(strip_tags($article->introtext)));
+              $descriptionfb    = substr($descriptionfb, 0, 300);
+            }
 
-            $url                = key($doc->_links); // Key of first element form this array contains the canonical url
+            foreach ($doc->_links as $l => $array) {
+              if ($array['relation'] == 'canonical') {
+                $url            = $doc->_links[$l]; // get canonical url if exist
+              }
+            }
             $ogtype             = 'article';
 
             $images = json_decode($article->images);
