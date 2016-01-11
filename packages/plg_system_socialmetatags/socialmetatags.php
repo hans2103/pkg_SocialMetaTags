@@ -64,10 +64,6 @@ class PlgSystemSocialmetatags extends JPlugin
             $article->load($id);
 
             $profile            = JUserHelper::getProfile($article->created_by);
-            $profile_googleplus = $profile->socialmetatags['googleplus'];
-            $profile_twitter    = $profile->socialmetatags['twitter'];
-            $profile_facebook   = $profile->socialmetatags['facebook'];
-
             $user               = JFactory::getUser($article->created_by);
             $realname           = $user->name;
 
@@ -137,14 +133,14 @@ class PlgSystemSocialmetatags extends JPlugin
         if($this->params->get('googlepluspublisher')) {
             $doc->addHeadLink($this->params->get('googlepluspublisher'), 'publisher', 'rel');
         }
-        if($profile_googleplus) {
-            $doc->addHeadLink($profile_googleplus, 'author', 'rel');
+        if($profile->socialmetatags['googleplus']) {
+            $doc->addHeadLink($profile->socialmetatags['googleplus'], 'author', 'rel');
         }
 
         // Meta Tags for Twitter
         $metaname['twitter:card'] = 'summary_large_image';
         $metaname['twitter:site'] = $this->params->get('twittersite');
-        $metaname['twitter:creator'] = $profile_twitter;
+        $metaname['twitter:creator'] = $profile->socialmetatags['twitter'];
         $metaname['twitter:title'] = $title;
         $metaname['twitter:description'] = $descriptiontw;
         $metaname['twitter:image:src'] = $basicimage;
@@ -157,7 +153,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:site_name'] = $sitename;
         $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
         $metaproperty['profile:last_name'] = $realname;
-        $metaproperty['profile:username'] = $profile_facebook;
+        $metaproperty['profile:username'] = $profile->socialmetatags['facebook'];
         $metaproperty['og:description'] = $descriptionfb;
         $metaproperty['og:see_also'] = $url_site;
 
