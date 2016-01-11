@@ -50,8 +50,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $menu           = $app->getMenu();
 
         // Get Plugin info
-        $params         = $this->params;
-        $basicimage     = $params->get('basicimage');
+        $basicimage     = $this->params->get('basicimage');
         $ogtype         = 'business.business';
 
         // Component specific overrides
@@ -121,22 +120,22 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaname       = array();
 
         // Meta Tags for Discoverability
-        $metaproperty['place:location:latitude'] = $params->get('placelocationlatitude');
-        $metaproperty['place:location:longitude'] = $params->get('placelocationlongitude');
-        $metaproperty['business:contact_data:street_address'] = $params->get('businesscontentdatastreetaddress');
-        $metaproperty['business:contact_data:locality'] = $params->get('businesscontentdatalocality');
-        $metaproperty['business:contact_data:postal_code'] = $params->get('businesscontentdatapostalcode');
-        $metaproperty['business:contact_data:country_name'] = $params->get('businesscontentdatacountryname');
-        $metaproperty['business:contact_data:email'] = $params->get('businesscontentdataemail');
-        $metaproperty['business:contact_data:phone_number'] = $params->get('businesscontentdataphonenumber');
-        $metaproperty['business:contact_data:website'] = $params->get('businesscontactdatawebsite');
+        $metaproperty['place:location:latitude'] = $this->params->get('placelocationlatitude');
+        $metaproperty['place:location:longitude'] = $this->params->get('placelocationlongitude');
+        $metaproperty['business:contact_data:street_address'] = $this->params->get('businesscontentdatastreetaddress');
+        $metaproperty['business:contact_data:locality'] = $this->params->get('businesscontentdatalocality');
+        $metaproperty['business:contact_data:postal_code'] = $this->params->get('businesscontentdatapostalcode');
+        $metaproperty['business:contact_data:country_name'] = $this->params->get('businesscontentdatacountryname');
+        $metaproperty['business:contact_data:email'] = $this->params->get('businesscontentdataemail');
+        $metaproperty['business:contact_data:phone_number'] = $this->params->get('businesscontentdataphonenumber');
+        $metaproperty['business:contact_data:website'] = $this->params->get('businesscontactdatawebsite');
 
         // Meta Tags for Google Plus
         $metaitemprop['name'] = $title;
         $metaitemprop['description'] = $description;
         $metaitemprop['image'] = $basicimage;
-        if($params->get('googlepluspublisher')) {
-            $doc->addHeadLink($params->get('googlepluspublisher'), 'publisher', 'rel');
+        if($this->params->get('googlepluspublisher')) {
+            $doc->addHeadLink($this->params->get('googlepluspublisher'), 'publisher', 'rel');
         }
         if($profile_googleplus) {
             $doc->addHeadLink($profile_googleplus, 'author', 'rel');
@@ -144,7 +143,7 @@ class PlgSystemSocialmetatags extends JPlugin
 
         // Meta Tags for Twitter
         $metaname['twitter:card'] = 'summary_large_image';
-        $metaname['twitter:site'] = $params->get('twittersite');
+        $metaname['twitter:site'] = $this->params->get('twittersite');
         $metaname['twitter:creator'] = $profile_twitter;
         $metaname['twitter:title'] = $title;
         $metaname['twitter:description'] = $descriptiontw;
@@ -162,14 +161,14 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:description'] = $descriptionfb;
         $metaproperty['og:see_also'] = $url_site;
 
-        if($params->get('fbadmin'))
+        if($this->params->get('fbadmin'))
         {
-          $metaproperty['fb:admins'] = $params->get('fbadmin');
+          $metaproperty['fb:admins'] = $this->params->get('fbadmin');
         }
 
-        if($params->get('fbappid'))
+        if($this->params->get('fbappid'))
         {
-          $metaproperty['fb:app_id'] = $params->get('fbappid');
+          $metaproperty['fb:app_id'] = $this->params->get('fbappid');
         }
 
         $metaproperty['article:published_time'] = $publishedtime;
