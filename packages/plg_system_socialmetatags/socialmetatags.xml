@@ -119,6 +119,12 @@
                     label="SMT_FACEBOOKADMIN_LABEL"
                     description="SMT_FACEBOOKADMIN_DESC" />
                 <field
+                    name="fbappid"
+                    type="text"
+                    default=""
+                    label="SMT_FACEBOOKAPPID_LABEL"
+                    description="SMT_FACEBOOKAPPID_DESC" />
+                <field
                     type="spacer"
                     name="smtfacebookextra"
                     class="text"

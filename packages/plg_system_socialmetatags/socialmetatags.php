@@ -53,7 +53,6 @@ class PlgSystemSocialmetatags extends JPlugin
         $params         = $this->params;
         $basicimage     = $params->get('basicimage');
         $ogtype         = 'business.business';
-        $fbAdmin        = $params->get('fbadmin');
 
         // Component specific overrides
         if ($menu->getActive() == $menu->getDefault())
@@ -162,7 +161,17 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['profile:username'] = $profile_facebook;
         $metaproperty['og:description'] = $descriptionfb;
         $metaproperty['og:see_also'] = $url_site;
-        $metaproperty['fb:admins'] = $fbAdmin;
+
+        if($params->get('fbadmin'))
+        {
+          $metaproperty['fb:admins'] = $params->get('fbadmin');
+        }
+
+        if($params->get('fbappid'))
+        {
+          $metaproperty['fb:app_id'] = $params->get('fbappid');
+        }
+
         $metaproperty['article:published_time'] = $publishedtime;
         $metaproperty['article:modified_time'] = $modifiedtime;
         $metaproperty['og:updated_time'] = $modifiedtime;
