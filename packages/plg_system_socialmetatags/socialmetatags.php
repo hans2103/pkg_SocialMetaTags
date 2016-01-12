@@ -104,7 +104,8 @@ class PlgSystemSocialmetatags extends JPlugin
 			// If the article has a introtext, use it as description
             if(!empty($article->introtext))
             {
-                $description = trim(htmlspecialchars(strip_tags($article->introtext)));
+				$description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
+				$description = preg_replace('/\s\s+/', ' ', $description);
             }
 
 			// Set Twitter description
@@ -139,7 +140,13 @@ class PlgSystemSocialmetatags extends JPlugin
             {
 				// Get img tag from article
 				preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
-				$basicimage = JURI::current() . "/" . $articleimages[2];
+				$basicimage = JURI::base() . $articleimages[2];
+            }
+			elseif (strpos($article->introtext, '<img') !== false)
+            {
+				// Get img tag from article
+				preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
+				$basicimage = JURI::base() . $articleimages[2];
             }
 
 			// Set publish and modifed time
