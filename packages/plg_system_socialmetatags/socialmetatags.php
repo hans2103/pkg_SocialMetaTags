@@ -19,6 +19,36 @@ class PlgSystemSocialmetatags extends JPlugin
      */
     protected $autoloadLanguage = true;
 
+    function onAfterRoute()
+    {
+      $app = JFactory::getApplication();
+
+      if ( $app->isAdmin() )
+      {
+        return;
+      }
+      $unsupported = false;
+
+      if (isset($_SERVER['HTTP_USER_AGENT']))
+      {
+        /* Facebook User Agent
+        * facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+        * LinkedIn User Agent
+        * LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)
+        */
+        $pattern = strtolower('/facebookexternalhit|LinkedInBot/x');
+        if (preg_match($pattern, strtolower($_SERVER['HTTP_USER_AGENT'])))
+        {
+          $unsupported = true;
+        }
+      }
+
+      if (($app->get('gzip') == 1) && $unsupported)
+      {
+        $app->set('gzip', 0);
+      }
+    }
+
     public function onBeforeRender()
     {
         // Connect to Joomla
