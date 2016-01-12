@@ -133,6 +133,16 @@ class PlgSystemSocialmetatags extends JPlugin
             {
               $basicimage = JURI::base() . $images->image_intro;
             }
+            elseif (strpos($article->fulltext, '<img') !== false)
+            {
+              // Get img tag from article
+              preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
+              $basicimage = JURI::current() . "/" . $articleimages[2];
+            }
+            else
+            {
+              $basicimage = JURI::base() . $this->params->get('basicimage');
+            }
 
             $publishedtime  = $article->created;
             $modifiedtime  = $article->modified;
