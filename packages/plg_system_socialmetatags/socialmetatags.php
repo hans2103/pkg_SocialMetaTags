@@ -21,9 +21,9 @@ class PlgSystemSocialmetatags extends JPlugin
 
     function onAfterRoute()
     {
-      $app = JFactory::getApplication();
+      $this->app = JFactory::getApplication();
 
-      if ( $app->isAdmin() )
+      if ( $this->app->isAdmin() )
       {
         return;
       }
@@ -43,44 +43,41 @@ class PlgSystemSocialmetatags extends JPlugin
         }
       }
 
-      if (($app->get('gzip') == 1) && $unsupported)
+      if (($this->app->get('gzip') == 1) && $unsupported)
       {
-        $app->set('gzip', 0);
+        $this->app->set('gzip', 0);
       }
     }
 
     public function onBeforeRender()
     {
         // Connect to Joomla
-        $app            = JFactory::getApplication();
-        $doc            = JFactory::getDocument();
-        $option         = $app->input->getCmd('option', '');
-        $view           = $app->input->getCmd('view', '');
-        $id             = $app->input->getCmd('id', '');
-        $format         = $app->input->getCmd('format', '');
+        $this->app      = JFactory::getApplication();
+        $this->doc      = JFactory::getDocument();
 
         // Don't run on Joomla backend
-        if ($app->isAdmin())
+        if ($this->app->isAdmin())
         {
             return;
         }
 
         // Don't execute on RSS feed
-        if ($format == 'feed')
+        if ($this->app->input->getCmd('format', '') == 'feed')
         {
             return;
         }
 
         // Detecting Active Variables
-        $sitename       = $app->getCfg('sitename');
-        $description    = $doc->getDescription();
-        $url_site       = JURI::base();
+        $sitename       = $this->app->getCfg('sitename');
+        $description    = $this->doc->getDescription();
         $url            = JURI::current();
-        $title          = str_replace(' - '.$app->getCfg('sitename'), '', $doc->getTitle());
-        $menu           = $app->getMenu();
+        $title          = htmlspecialchars(str_replace(' - '.$this->app->getCfg('sitename'), '', $this->doc->getTitle()));
+        $menu           = $this->app->getMenu();
 
         // Get Plugin info
         $basicimage     = $this->params->get('basicimage');
+        $fbAdmin        = $this->params->get('fbadmin');
+        $fbAppid        = $this->params->get('fbappid');
         $ogtype         = 'business.business';
 
         // Component specific overrides
@@ -88,10 +85,10 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             // overrides for homepage
         }
-        elseif ($option == 'com_content' && $view == 'article')
+        elseif ($this->app->input->getCmd('option', '') == 'com_content' && $this->app->input->getCmd('view', '') == 'article')
         {
             $article            = JTable::getInstance("content");
-            $article->load($id);
+            $article->load($this->app->input->getCmd('id', ''));
 
             $profile            = JUserHelper::getProfile($article->created_by);
             $user               = JFactory::getUser($article->created_by);
@@ -103,37 +100,37 @@ class PlgSystemSocialmetatags extends JPlugin
             if(!$description)
             {
                 $description    = trim(htmlspecialchars(strip_tags($article->introtext)));
-                $descriptiontw  = substr($descriptiontw, 0, 160);
-                $doc->setDescription($description);
+                $descriptiontw  = JHTML::_('string.truncate', $description, 160);
+                $this->doc->setDescription($description);
             }
 
             if (!$descriptiontw)
             {
               $descriptiontw    = trim(htmlspecialchars(strip_tags($article->introtext)));
-              $descriptiontw    = substr($descriptiontw, 0, 140);
+              $descriptiontw    = JHTML::_('string.truncate', $descriptiontw, 140);
             }
 
             if (!$descriptionfb)
             {
               $descriptionfb    = trim(htmlspecialchars(strip_tags($article->introtext)));
-              $descriptionfb    = substr($descriptionfb, 0, 300);
+              $descriptionfb    = JHTML::_('string.truncate', $descriptionfb, 300);
             }
 
-            foreach ($doc->_links as $l => $array) {
+            foreach ($this->doc->_links as $l => $array) {
               if ($array['relation'] == 'canonical') {
-                $url            = $doc->_links[$l]; // get canonical url if exist
+                $url            = $this->doc->_links[$l]; // get canonical url if exist
               }
             }
             $ogtype             = 'article';
 
             $images = json_decode($article->images);
-            if($images->image_fulltext)
+            if( $images->image_fulltext != '' )
             {
-                $basicimage = $url_site.$images->image_fulltext;
+              $basicimage = JURI::base() . $images->image_fulltext;
             }
-            elseif ($images->image_intro)
+            elseif ($images->image_intro != '')
             {
-                $basicimage = $url_site.$images->image_intro;
+              $basicimage = JURI::base() . $images->image_intro;
             }
 
             $publishedtime  = $article->created;
@@ -160,11 +157,13 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaitemprop['name'] = $title;
         $metaitemprop['description'] = $description;
         $metaitemprop['image'] = $basicimage;
-        if($this->params->get('googlepluspublisher')) {
-            $doc->addHeadLink($this->params->get('googlepluspublisher'), 'publisher', 'rel');
+        if($this->params->get('googlepluspublisher'))
+        {
+            $this->doc->addHeadLink($this->params->get('googlepluspublisher'), 'publisher', 'rel');
         }
-        if($profile->socialmetatags['googleplus']) {
-            $doc->addHeadLink($profile->socialmetatags['googleplus'], 'author', 'rel');
+        if($profile_googleplus)
+        {
+            $this->doc->addHeadLink($profile->socialmetatags['googleplus'], 'author', 'rel');
         }
 
         // Meta Tags for Twitter
@@ -176,25 +175,27 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaname['twitter:image:src'] = $basicimage;
 
         // Meta Tags for Facebook
+        // required
         $metaproperty['og:title'] = $title;
         $metaproperty['og:type'] = $ogtype;
         $metaproperty['og:image'] = $basicimage;
         $metaproperty['og:url'] = $url;
+        // optional
         $metaproperty['og:site_name'] = $sitename;
         $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
         $metaproperty['profile:last_name'] = $realname;
         $metaproperty['profile:username'] = $profile->socialmetatags['facebook'];
         $metaproperty['og:description'] = $descriptionfb;
-        $metaproperty['og:see_also'] = $url_site;
+        $metaproperty['og:see_also'] = JURI::base();
 
-        if($this->params->get('fbadmin'))
+        if(isset($fbAdmin))
         {
-          $metaproperty['fb:admins'] = $this->params->get('fbadmin');
+          $metaproperty['fb:admins'] = $fbAdmin;
         }
 
-        if($this->params->get('fbappid'))
+        if(isset($fbAppid))
         {
-          $metaproperty['fb:app_id'] = $this->params->get('fbappid');
+          $metaproperty['fb:app_id'] = $fbAppid;
         }
 
         $metaproperty['article:published_time'] = $publishedtime;
@@ -205,7 +206,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->addCustomTag('<meta property="'.$key.'" content="'.$value.'" />');
+                $this->doc->addCustomTag('<meta property="'.$key.'" content="'.$value.'" />');
             }
         }
 
@@ -213,7 +214,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" />');
+                $this->doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" />');
             }
         }
 
@@ -221,7 +222,7 @@ class PlgSystemSocialmetatags extends JPlugin
         {
             if ($value)
             {
-                $doc->setMetaData($key,$value);
+                $this->doc->setMetaData($key,$value);
             }
         }
     }
