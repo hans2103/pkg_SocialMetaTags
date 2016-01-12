@@ -81,7 +81,7 @@
                     description="SMT_BUSINESSCONTENTDATAWEBSITE_DESC" />
                 <field
                     name="basicimage"
-                    type="text"
+                    type="media"
                     default=""
                     label="SMT_BASICIMAGE_LABEL"
                     description="SMT_BASICIMAGE_DESC" />
