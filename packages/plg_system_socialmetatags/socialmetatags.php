@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Social Meta Tags
- * @copyright   Copyright (c) 2014 Hans Kuijpers - HKweb
+ * @copyright   Copyright (c) Hans Kuijpers - HKweb
  * @license     GNU General Public License version 3 or later
  */
 
