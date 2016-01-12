@@ -104,7 +104,8 @@ class PlgSystemSocialmetatags extends JPlugin
 			// If the article has a introtext, use it as description
             if(!empty($article->introtext))
             {
-                $description = trim(htmlspecialchars(strip_tags($article->introtext)));
+				$description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
+				$description = preg_replace('/\s\s+/', ' ', $description);
             }
 
 			// Set Twitter description
