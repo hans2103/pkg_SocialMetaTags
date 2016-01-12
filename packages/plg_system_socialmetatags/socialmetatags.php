@@ -102,7 +102,7 @@ class PlgSystemSocialmetatags extends JPlugin
             $realname           = $user->name;
 
 			// If the article has a introtext, use it as description
-            if(!empty($article->introtext))
+            if (!empty($article->introtext))
             {
 				$description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
 				$description = preg_replace('/\s\s+/', ' ', $description);
@@ -128,7 +128,7 @@ class PlgSystemSocialmetatags extends JPlugin
             }
 
 			// Set social image
-			if(!empty($images->image_fulltext))
+			if (!empty($images->image_fulltext))
             {
 				$basicimage = JURI::base() . $images->image_fulltext;
             }
@@ -228,12 +228,12 @@ class PlgSystemSocialmetatags extends JPlugin
 			$metaproperty['profile:username'] = $profile_facebook;
 		}
 
-        if(isset($fbAdmin))
+        if (isset($fbAdmin))
         {
 			$metaproperty['fb:admins'] = $fbAdmin;
         }
 
-        if(isset($fbAppid))
+        if (isset($fbAppid))
         {
 			$metaproperty['fb:app_id'] = $fbAppid;
         }
@@ -248,7 +248,7 @@ class PlgSystemSocialmetatags extends JPlugin
         	$metaproperty['article:modified_time'] = $modifiedtime;
 		}
 
-		if(isset($modifiedtime))
+		if (isset($modifiedtime))
 		{
         	$metaproperty['og:updated_time'] = $modifiedtime;
 		}
