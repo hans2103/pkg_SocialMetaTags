@@ -148,8 +148,8 @@ class PlgSystemSocialmetatags extends JPlugin
 
 			// Set Profile information
 			$profile_googleplus = $profile->socialmetatags['googleplus'];
-			$twitter_username   = $profile->socialmetatags['twitter'];
-			$facebook_username  = $profile->socialmetatags['facebook'];
+			$profile_twitter    = $profile->socialmetatags['twitter'];
+			$profile_facebook   = $profile->socialmetatags['facebook'];
         }
 		else
 		{
@@ -157,7 +157,7 @@ class PlgSystemSocialmetatags extends JPlugin
 			$descriptiontw      = JHtml::_('string.truncate', $description, 140);
 			$descriptionfb      = JHtml::_('string.truncate', $description, 300);
 			$profile_googleplus = $this->params->get('googlepluspublisher');
-			$twitter_username   = $this->params->get('twittersite');
+			$profile_twitter    = $this->params->get('twittersite');
 		}
 
         // Set Meta Tags
@@ -193,7 +193,7 @@ class PlgSystemSocialmetatags extends JPlugin
         // Meta Tags for Twitter
         $metaname['twitter:card']           = 'summary_large_image';
         $metaname['twitter:site']           = $this->params->get('twittersite');
-        $metaname['twitter:creator']        = $twitter_username;
+        $metaname['twitter:creator']        = $profile_twitter;
         $metaname['twitter:title']          = $title;
         $metaname['twitter:description']    = $descriptiontw;
         $metaname['twitter:image:src']      = $basicimage;
@@ -216,9 +216,9 @@ class PlgSystemSocialmetatags extends JPlugin
 			$metaproperty['profile:last_name'] = $realname;
 		}
 
-		if (isset($facebook_username))
+		if (isset($profile_facebook))
 		{
-			$metaproperty['profile:username'] = $facebook_username;
+			$metaproperty['profile:username'] = $profile_facebook;
 		}
 
         if(isset($fbAdmin))
