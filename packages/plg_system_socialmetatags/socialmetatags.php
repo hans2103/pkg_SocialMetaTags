@@ -54,6 +54,7 @@ class PlgSystemSocialmetatags extends JPlugin
         // Connect to Joomla
         $this->app      = JFactory::getApplication();
         $this->doc      = JFactory::getDocument();
+        $this->lang     = JFactory::getLanguage();
 
         // Don't run on Joomla backend
         if ($this->app->isAdmin())
@@ -180,6 +181,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:type'] = $ogtype;
         $metaproperty['og:image'] = $basicimage;
         $metaproperty['og:url'] = $url;
+        $metaproperty['og:locale'] = str_replace('-','_',$this->lang->getTag());
         // optional
         $metaproperty['og:site_name'] = $sitename;
         $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
