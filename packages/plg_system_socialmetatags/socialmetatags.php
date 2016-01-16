@@ -19,37 +19,37 @@ class PlgSystemSocialmetatags extends JPlugin
      */
     protected $autoloadLanguage = true;
 
-	// JFactory::getApplication();
-	protected $app;
+    // JFactory::getApplication();
+    protected $app;
 
     function onAfterRoute()
     {
-		if ($this->app->isAdmin())
-		{
-			return true;
-		}
+        if ($this->app->isAdmin())
+        {
+            return true;
+        }
 
-		$unsupported = false;
+        $unsupported = false;
 
-		if (isset($_SERVER['HTTP_USER_AGENT']))
-		{
-	        /* Facebook User Agent
-	        * facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
-	        * LinkedIn User Agent
-	        * LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)
-	        */
-        	$pattern = strtolower('/facebookexternalhit|LinkedInBot/x');
+        if (isset($_SERVER['HTTP_USER_AGENT']))
+        {
+            /* Facebook User Agent
+            * facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+            * LinkedIn User Agent
+            * LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)
+            */
+            $pattern = strtolower('/facebookexternalhit|LinkedInBot/x');
 
-			if (preg_match($pattern, strtolower($_SERVER['HTTP_USER_AGENT'])))
-	        {
-				$unsupported = true;
-			}
-		}
+            if (preg_match($pattern, strtolower($_SERVER['HTTP_USER_AGENT'])))
+            {
+                $unsupported = true;
+            }
+        }
 
-		if (($this->app->get('gzip') == 1) && $unsupported)
-		{
-			$this->app->set('gzip', 0);
-		}
+        if (($this->app->get('gzip') == 1) && $unsupported)
+        {
+            $this->app->set('gzip', 0);
+        }
     }
 
     public function onBeforeRender()
@@ -90,82 +90,82 @@ class PlgSystemSocialmetatags extends JPlugin
         }
         elseif ($this->app->input->get('option') == 'com_content' && $this->app->input->get('view') == 'article')
         {
-			// Get information of current article and set og:type
-			$article            = JTable::getInstance("content");
+            // Get information of current article and set og:type
+            $article            = JTable::getInstance("content");
             $article->load($this->app->input->get('id'));
-			$images             = json_decode($article->images);
-			$ogtype             = 'article';
+            $images             = json_decode($article->images);
+            $ogtype             = 'article';
 
-			// Get profile and user information
-			$profile            = JUserHelper::getProfile($article->created_by);
+            // Get profile and user information
+            $profile            = JUserHelper::getProfile($article->created_by);
             $user               = JFactory::getUser($article->created_by);
             $realname           = $user->name;
 
-			// If the article has a introtext, use it as description
+            // If the article has a introtext, use it as description
             if (!empty($article->introtext))
             {
-				$description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
-				$description = preg_replace('/\s\s+/', ' ', $description);
+                $description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
+                $description = preg_replace('/\s\s+/', ' ', $description);
             }
 
-			// Set Twitter description
-			$descriptiontw = JHtml::_('string.truncate', $description, 140);
+            // Set Twitter description
+            $descriptiontw = JHtml::_('string.truncate', $description, 140);
 
-			// Set facebook descriptoin
-			$descriptionfb = JHtml::_('string.truncate', $description, 300);
+            // Set facebook descriptoin
+            $descriptionfb = JHtml::_('string.truncate', $description, 300);
 
-			// Set general descripton tag
-			$description = JHtml::_('string.truncate', $description, 160);
-			$this->doc->setDescription($description);
+            // Set general descripton tag
+            $description = JHtml::_('string.truncate', $description, 160);
+            $this->doc->setDescription($description);
 
-			// Get canonical url if exist
+            // Get canonical url if exist
             foreach ($this->doc->_links as $l => $array)
-			{
-				if ($array['relation'] == 'canonical')
-				{
-					$url = $this->doc->_links[$l];
-				}
+            {
+                if ($array['relation'] == 'canonical')
+                {
+                    $url = $this->doc->_links[$l];
+                }
             }
 
-			// Set social image
-			if (!empty($images->image_fulltext))
+            // Set social image
+            if (!empty($images->image_fulltext))
             {
-				$basicimage = JURI::base() . $images->image_fulltext;
+                $basicimage = JURI::base() . $images->image_fulltext;
             }
             elseif (!empty($images->image_intro))
             {
-				$basicimage = JURI::base() . $images->image_intro;
+                $basicimage = JURI::base() . $images->image_intro;
             }
             elseif (strpos($article->fulltext, '<img') !== false)
             {
-				// Get img tag from article
-				preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
-				$basicimage = JURI::base() . $articleimages[2];
+                // Get img tag from article
+                preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
+                $basicimage = JURI::base() . $articleimages[2];
             }
-			elseif (strpos($article->introtext, '<img') !== false)
+            elseif (strpos($article->introtext, '<img') !== false)
             {
-				// Get img tag from article
-				preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
-				$basicimage = JURI::base() . $articleimages[2];
+                // Get img tag from article
+                preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
+                $basicimage = JURI::base() . $articleimages[2];
             }
 
-			// Set publish and modifed time
+            // Set publish and modifed time
             $publishedtime = $article->created;
             $modifiedtime  = $article->modified;
 
-			// Set Profile information
-			$profile_googleplus = $profile->socialmetatags['googleplus'];
-			$profile_twitter    = $profile->socialmetatags['twitter'];
-			$profile_facebook   = $profile->socialmetatags['facebook'];
+            // Set Profile information
+            $profile_googleplus = $profile->socialmetatags['googleplus'];
+            $profile_twitter    = $profile->socialmetatags['twitter'];
+            $profile_facebook   = $profile->socialmetatags['facebook'];
         }
-		else
-		{
-			// Fallback
-			$descriptiontw      = JHtml::_('string.truncate', $description, 140);
-			$descriptionfb      = JHtml::_('string.truncate', $description, 300);
-			$profile_googleplus = $this->params->get('googlepluspublisher');
-			$profile_twitter    = $this->params->get('twittersite');
-		}
+        else
+        {
+            // Fallback
+            $descriptiontw      = JHtml::_('string.truncate', $description, 140);
+            $descriptionfb      = JHtml::_('string.truncate', $description, 300);
+            $profile_googleplus = $this->params->get('googlepluspublisher');
+            $profile_twitter    = $this->params->get('twittersite');
+        }
 
         // Set Meta Tags
         $metaproperty = array();
@@ -212,48 +212,48 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['og:image']           = $basicimage;
         $metaproperty['og:url']             = $url;
         $metaproperty['og:locale']          = str_replace('-','_',$this->lang->getTag());
-		// optional
+        // optional
         $metaproperty['og:site_name']       = $sitename;
         $metaproperty['profile:first_name'] = ''; // By default Joomla has just one field for name
-		$metaproperty['og:description']     = $descriptionfb;
+        $metaproperty['og:description']     = $descriptionfb;
         $metaproperty['og:see_also']        = JURI::base();
 
-		if (isset($realname))
-		{
-			$metaproperty['profile:last_name'] = $realname;
-		}
+        if (isset($realname))
+        {
+            $metaproperty['profile:last_name'] = $realname;
+        }
 
-		if (isset($profile_facebook))
-		{
-			$metaproperty['profile:username'] = $profile_facebook;
-		}
+        if (isset($profile_facebook))
+        {
+            $metaproperty['profile:username'] = $profile_facebook;
+        }
 
         if (isset($fbAdmin))
         {
-			$metaproperty['fb:admins'] = $fbAdmin;
+            $metaproperty['fb:admins'] = $fbAdmin;
         }
 
         if (isset($fbAppid))
         {
-			$metaproperty['fb:app_id'] = $fbAppid;
+            $metaproperty['fb:app_id'] = $fbAppid;
         }
 
-		if (isset($publishedtime))
-		{
-        	$metaproperty['article:published_time'] = $publishedtime;
-		}
+        if (isset($publishedtime))
+        {
+            $metaproperty['article:published_time'] = $publishedtime;
+        }
 
-		if (isset($modifiedtime))
-		{
-        	$metaproperty['article:modified_time'] = $modifiedtime;
-		}
+        if (isset($modifiedtime))
+        {
+            $metaproperty['article:modified_time'] = $modifiedtime;
+        }
 
-		if (isset($modifiedtime))
-		{
-        	$metaproperty['og:updated_time'] = $modifiedtime;
-		}
+        if (isset($modifiedtime))
+        {
+            $metaproperty['og:updated_time'] = $modifiedtime;
+        }
 
-		// Set mateproperty tags
+        // Set mateproperty tags
         foreach ($metaproperty as $key => $value)
         {
             if ($value)
@@ -262,7 +262,7 @@ class PlgSystemSocialmetatags extends JPlugin
             }
         }
 
-		// Set itemprp tags
+        // Set itemprp tags
         foreach ($metaitemprop as $key => $value)
         {
             if ($value)
@@ -271,7 +271,7 @@ class PlgSystemSocialmetatags extends JPlugin
             }
         }
 
-		// Set metaname tags
+        // Set metaname tags
         foreach ($metaname as $key => $value)
         {
             if ($value)
