@@ -84,11 +84,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $ogtype      = 'business.business';
 
         // Component specific overrides
-        if ($menu->getActive() == $menu->getDefault())
-        {
-            // overrides for homepage
-        }
-        elseif ($this->app->input->get('option') == 'com_content' && $this->app->input->get('view') == 'article')
+        if ($this->app->input->get('option') == 'com_content' && $this->app->input->get('view') == 'article')
         {
 			// Get information of current article and set og:type
 			$article            = JTable::getInstance("content");
