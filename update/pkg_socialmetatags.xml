@@ -25,7 +25,7 @@
     <maintainer>hans2103</maintainer>
     <maintainerurl>http://www.hkweb.nl</maintainerurl>
 
-    <targetplatform name="joomla" version="3.[0-4]" />
+    <targetplatform name="joomla" version="3.[0-9]" />
   </update>
   <update>
     <version>1.4.2</version>
@@ -52,6 +52,6 @@
     <maintainer>hans2103</maintainer>
     <maintainerurl>http://www.hkweb.nl</maintainerurl>
 
-    <targetplatform name="joomla" version="3.[0-4]" />
+    <targetplatform name="joomla" version="3.[0-9]" />
   </update>
 </updates>
