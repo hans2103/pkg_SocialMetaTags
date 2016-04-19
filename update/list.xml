@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extensionset name="SocialMetaTags extension set" description="">
-	<extension name="SocialMetaTags Package" element="pkg_socialmetatags" type="package" version="1.4.3" detailsurl="https://raw.github.com/hans2103/pkg_SocialMetaTags/master/update/pkg_socialmetatags.xml" />
+	<extension name="SocialMetaTags Package" element="pkg_socialmetatags" type="package" version="1.4.4" detailsurl="https://raw.github.com/hans2103/pkg_SocialMetaTags/master/update/pkg_socialmetatags.xml" />
 </extensionset>
