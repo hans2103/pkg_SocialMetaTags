@@ -98,7 +98,7 @@ class PlgSystemSocialmetatags extends JPlugin
             $realname           = $user->name;
 
             // If the article has a introtext, use it as description
-            if (!empty($article->introtext))
+            if (empty($article->metadesc) && !empty($article->introtext))
             {
                 $description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
                 $description = preg_replace('/\s\s+/', ' ', $description);
@@ -150,9 +150,9 @@ class PlgSystemSocialmetatags extends JPlugin
             $modifiedtime  = $article->modified;
 
             // Set Profile information
-            $profile_googleplus = $profile->socialmetatags['googleplus'];
-            $profile_twitter    = $profile->socialmetatags['twitter'];
-            $profile_facebook   = $profile->socialmetatags['facebook'];
+            $profile_googleplus = (empty($profile->socialmetatags['googleplus']) ? '' : $profile->socialmetatags['googleplus']);
+            $profile_twitter    = (empty($profile->socialmetatags['twitter']) ? '' : $profile->socialmetatags['twitter']);
+            $profile_facebook   = (empty($profile->socialmetatags['facebook']) ? '' : $profile->socialmetatags['facebook']);
         }
         else
         {
