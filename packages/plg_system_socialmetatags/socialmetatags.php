@@ -75,7 +75,7 @@ class PlgSystemSocialmetatags extends JPlugin
         $description = $this->doc->getMetaData("description");
         $url         = JURI::current();
         $title       = htmlspecialchars(str_replace(' - '.$this->app->getCfg('sitename'), '', $this->doc->getTitle()));
-        $menu        = $this->app->getMenu();
+        //$menu        = $this->app->getMenu();
 
         // Get Plugin info
         $basicimage  = JURI::base() . $this->params->get('basicimage');
@@ -89,7 +89,7 @@ class PlgSystemSocialmetatags extends JPlugin
             // Get information of current article and set og:type
             $article            = JTable::getInstance("content");
             $article->load($this->app->input->get('id'));
-            $images             = json_decode($article->images);
+            //$images             = json_decode($article->images);
             $ogtype             = 'article';
 
             // Get profile and user information
@@ -124,26 +124,7 @@ class PlgSystemSocialmetatags extends JPlugin
             }
 
             // Set social image
-            if (!empty($images->image_fulltext))
-            {
-                $basicimage = JURI::base() . $images->image_fulltext;
-            }
-            elseif (!empty($images->image_intro))
-            {
-                $basicimage = JURI::base() . $images->image_intro;
-            }
-            elseif (strpos($article->fulltext, '<img') !== false)
-            {
-                // Get img tag from article
-                preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
-                $basicimage = JURI::base() . $articleimages[2];
-            }
-            elseif (strpos($article->introtext, '<img') !== false)
-            {
-                // Get img tag from article
-                preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
-                $basicimage = JURI::base() . $articleimages[2];
-            }
+            $basicimage = $this->_setSocialImage($article);
 
             // Set publish and modifed time
             $publishedtime = $article->created;
@@ -165,7 +146,6 @@ class PlgSystemSocialmetatags extends JPlugin
 
         // Set Meta Tags
         $metaproperty = array();
-        $metaitemprop = array();
         $metaname     = array();
 
         // Meta Tags for Discoverability
@@ -178,11 +158,6 @@ class PlgSystemSocialmetatags extends JPlugin
         $metaproperty['business:contact_data:email']          = $this->params->get('businesscontentdataemail');
         $metaproperty['business:contact_data:phone_number']   = $this->params->get('businesscontentdataphonenumber');
         $metaproperty['business:contact_data:website']        = $this->params->get('businesscontactdatawebsite');
-
-        // Meta Tags for Google Plus
-        $metaitemprop['name']        = $title;
-        $metaitemprop['description'] = $description;
-        $metaitemprop['image']       = $basicimage;
 
         if ($this->params->get('googlepluspublisher'))
         {
@@ -258,15 +233,6 @@ class PlgSystemSocialmetatags extends JPlugin
             }
         }
 
-        // Set itemprp tags
-        foreach ($metaitemprop as $key => $value)
-        {
-            if ($value)
-            {
-                $this->doc->addCustomTag('<meta itemprop="'.$key.'" content="'.$value.'" />');
-            }
-        }
-
         // Set metaname tags
         foreach ($metaname as $key => $value)
         {
@@ -275,5 +241,69 @@ class PlgSystemSocialmetatags extends JPlugin
                 $this->doc->setMetaData($key,$value);
             }
         }
+    }
+
+    public function onContentBeforeDisplay($context, &$article)
+    {
+        $description = JFactory::getDocument()->getMetaData("description");
+        $basicimage  = JURI::base() . $this->params->get('basicimage');
+
+        if ($this->app->input->get('option') == 'com_content' && $this->app->input->get('view') == 'article')
+        {
+            // If the article has a introtext, use it as description
+            if (empty($article->metadesc) && !empty($article->introtext))
+            {
+                $description = preg_replace('/{[\s\S]+?}/', '', trim(htmlspecialchars(strip_tags($article->introtext))));
+                $description = preg_replace('/\s\s+/', ' ', $description);
+            }
+
+            $basicimage = $this->_setSocialImage($article);
+        }
+
+        // Meta Tags for Google Plus
+        // already called in default Joomla. $metaitemprop['name']        = $article->title;
+        $metaitemprop['description'] = $description;
+        $metaitemprop['image']       = $basicimage;
+
+        $aReturn = array();
+        // Set itempr0p tags
+        foreach ($metaitemprop as $key => $value)
+        {
+            if ($value)
+            {
+                array_push($aReturn, '<meta itemprop="'.$key.'" content="'.$value.'" />');
+            }
+        }
+
+        return implode("\r\n", $aReturn);
+
+    }
+
+    private function _setSocialImage(&$article)
+    {
+        $images = json_decode($article->images);
+        // Set social image
+        if (!empty($images->image_fulltext))
+        {
+            $basicimage = JURI::base() . $images->image_fulltext;
+        }
+        elseif (!empty($images->image_intro))
+        {
+            $basicimage = JURI::base() . $images->image_intro;
+        }
+        elseif (strpos($article->fulltext, '<img') !== false)
+        {
+            // Get img tag from article
+            preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
+            $basicimage = JURI::base() . $articleimages[2];
+        }
+        elseif (strpos($article->introtext, '<img') !== false)
+        {
+            // Get img tag from article
+            preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
+            $basicimage = JURI::base() . $articleimages[2];
+        }
+
+        return $basicimage;
     }
 }
