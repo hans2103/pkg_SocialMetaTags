@@ -7,7 +7,7 @@
     <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
     <authorEmail>info@hkweb.nl</authorEmail>
     <authorUrl>http://www.hkweb.nl/</authorUrl>
-    <version>1.4.4</version>
+    <version>1.4.5</version>
     <description>PLG_SYSTEM_SOCIALMETATAGS_DESC</description>
     <files>
         <filename plugin="socialmetatags">socialmetatags.php</filename>
