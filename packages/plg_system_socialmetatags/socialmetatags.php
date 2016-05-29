@@ -70,6 +70,12 @@ class PlgSystemSocialmetatags extends JPlugin
 			return true;
 		}
 
+		// Don't execute on XML output
+		if ($this->app->input->getCmd('format', '') == 'xml')
+		{
+			return true;
+		}
+
 		// Detecting Active Variables
 		$sitename    = $this->app->getCfg('sitename');
 		$description = $this->doc->getMetaData("description");
