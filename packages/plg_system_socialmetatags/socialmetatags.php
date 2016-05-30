@@ -64,17 +64,12 @@ class PlgSystemSocialmetatags extends JPlugin
 			return true;
 		}
 
-		// Don't execute on RSS feed
-		if ($this->app->input->getCmd('format', '') == 'feed')
-		{
-			return true;
-		}
-
-		// Don't execute on XML output
-		if ($this->app->input->getCmd('format', '') == 'xml')
-		{
-			return true;
-		}
+		// Don't execute on RSS feed, XML, json nor raw
+    $exclude = array('feed', 'xml', 'json', 'raw');
+    if (in_array($this->app->input->getCmd('format', ''), $exclude))
+    {
+        return true;
+    }
 
 		// Detecting Active Variables
 		$sitename    = $this->app->getCfg('sitename');
