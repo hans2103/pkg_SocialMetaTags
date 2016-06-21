@@ -76,7 +76,8 @@ class PlgSystemSocialmetatags extends JPlugin
 		$sitename    = $this->app->getCfg('sitename');
 		$description = $this->doc->getMetaData("description");
 		$url         = JURI::current();
-		$title       = htmlspecialchars(str_replace(' - ' . $this->app->getCfg('sitename'), '', $this->doc->getTitle()));
+		// strip sitename added before or after the title.
+		$title       = htmlspecialchars(str_replace($this->app->getCfg('sitename') . ' - ', '', str_replace(' - ' . $this->app->getCfg('sitename'), '', $this->doc->getTitle())));
 		//$menu        = $this->app->getMenu();
 
 		// Get Plugin info
@@ -97,7 +98,7 @@ class PlgSystemSocialmetatags extends JPlugin
 			// Get profile and user information
 			$profile  = JUserHelper::getProfile($article->created_by);
 			$user     = JFactory::getUser($article->created_by);
-			$realname = $user->name;
+			$realname = $user->name;\
 
 			// If the article has a introtext, use it as description
 			if (empty($article->metadesc) && !empty($article->introtext))
