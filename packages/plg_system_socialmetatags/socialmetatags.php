@@ -98,6 +98,7 @@ class PlgSystemSocialmetatags extends JPlugin
 			$profile  = JUserHelper::getProfile($article->created_by);
 			$user     = JFactory::getUser($article->created_by);
 			$realname = $user->name;
+			$title 	  = $article->title;
 
 			// If the article has a introtext, use it as description
 			if (empty($article->metadesc) && !empty($article->introtext))
