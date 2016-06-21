@@ -77,7 +77,8 @@ class PlgSystemSocialmetatags extends JPlugin
 		$description = $this->doc->getMetaData("description");
 		$url         = JURI::current();
 		// strip sitename added before or after the title.
-		$title       = htmlspecialchars(str_replace($this->app->getCfg('sitename') . ' - ', '', str_replace(' - ' . $this->app->getCfg('sitename'), '', $this->doc->getTitle())));
+		$title       = htmlspecialchars(str_replace(' - ' . $this->app->getCfg('sitename'), '', $this->doc->getTitle()));
+		$title       = htmlspecialchars(str_replace($this->app->getCfg('sitename') . ' - ', '', $title));
 		//$menu        = $this->app->getMenu();
 
 		// Get Plugin info
