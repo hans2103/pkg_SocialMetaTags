@@ -1,9 +1,10 @@
 <?php
 /**
- * @package     Social Meta Tags
- * @copyright   Copyright (c) Hans Kuijpers - HKweb
- * @license     GNU General Public License version 3 or later
- */
+ * @package 	Plugin Social Meta Tags for Joomla! 3.4
+ * @author 		Hans Kuijpers
+ * @copyright 	(C) 2014 - Hans Kuijpers - HKweb
+ * @license 	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+**/
 
 // No direct access.
 defined('_JEXEC') or die;

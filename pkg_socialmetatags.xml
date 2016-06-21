@@ -6,6 +6,8 @@
   <packagename>socialmetatags</packagename>
   <version>1.4.6</version>
   <url>http://www.hkweb.nl/</url>
+  <copyright>Copyright (C) 2014 - Hans Kuijpers</copyright>
+  <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
   <packager>Hans Kuijpers</packager>
   <packagerurl>http://www.hkweb.nl/</packagerurl>
   <description>
