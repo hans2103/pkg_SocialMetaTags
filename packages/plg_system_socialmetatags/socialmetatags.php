@@ -99,7 +99,7 @@ class PlgSystemSocialmetatags extends JPlugin
 			// Get profile and user information
 			$profile  = JUserHelper::getProfile($article->created_by);
 			$user     = JFactory::getUser($article->created_by);
-			$realname = $user->name;\
+			$realname = $user->name;
 
 			// If the article has a introtext, use it as description
 			if (empty($article->metadesc) && !empty($article->introtext))
