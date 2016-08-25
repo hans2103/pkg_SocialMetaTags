@@ -66,23 +66,24 @@ class PlgSystemSocialmetatags extends JPlugin
 		}
 
 		// Don't execute on RSS feed, XML, json nor raw
-    $exclude = array('feed', 'xml', 'json', 'raw');
-    if (in_array($this->app->input->getCmd('format', ''), $exclude))
-    {
-        return true;
-    }
+		$exclude = array('feed', 'xml', 'json', 'raw');
+
+		if (in_array($this->app->input->getCmd('format', ''), $exclude))
+		{
+			return true;
+		}
 
 		// Detecting Active Variables
 		$sitename    = $this->app->getCfg('sitename');
 		$description = $this->doc->getMetaData("description");
 		$url         = JURI::current();
-		// strip sitename added before or after the title.
+
+		// Strip sitename added before or after the title.
 		$title       = htmlspecialchars(str_replace(' - ' . $this->app->getCfg('sitename'), '', $this->doc->getTitle()));
 		$title       = htmlspecialchars(str_replace($this->app->getCfg('sitename') . ' - ', '', $title));
-		//$menu        = $this->app->getMenu();
 
 		// Get Plugin info
-		$basicimage = JURI::base() . $this->params->get('basicimage');
+		$basicimage = $this->params->get('basicimage');
 		$fbAdmin    = $this->params->get('fbadmin');
 		$fbAppid    = $this->params->get('fbappid');
 		$ogtype     = 'business.business';
@@ -93,7 +94,6 @@ class PlgSystemSocialmetatags extends JPlugin
 			// Get information of current article and set og:type
 			$article = JTable::getInstance("content");
 			$article->load($this->app->input->get('id'));
-			//$images             = json_decode($article->images);
 			$ogtype = 'article';
 
 			// Get profile and user information
@@ -116,18 +116,18 @@ class PlgSystemSocialmetatags extends JPlugin
 
 			// Set general descripton tag
 			$description = JHtml::_('string.truncate', $description, 160);
-			$this->doc->setDescription($description);
+			$this->doc->setMetaData("description", $description);
 
 			// Get canonical url if exist
 			foreach ($this->doc->_links as $l => $array)
 			{
 				if ($array['relation'] == 'canonical')
 				{
-					$url = $this->doc->_links[$l];
+					$url = $l;
 				}
 			}
 
-			// Set social image
+			// Set new basic image
 			$basicimage = $this->_setSocialImage($article);
 
 			// Set publish and modifed time
@@ -285,7 +285,9 @@ class PlgSystemSocialmetatags extends JPlugin
 
 	private function _setSocialImage(&$article)
 	{
-		$images = json_decode($article->images);
+		$images     = json_decode($article->images);
+		$basicimage = JURI::base() . $this->params->get('basicimage');
+
 		// Set social image
 		if (!empty($images->image_fulltext))
 		{
@@ -311,3 +313,4 @@ class PlgSystemSocialmetatags extends JPlugin
 		return $basicimage;
 	}
 }
+
