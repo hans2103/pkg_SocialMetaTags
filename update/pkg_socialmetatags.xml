@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
   <update>
+    <version>1.4.7.3</version>
+    <name>SocialMetaTags Package</name>
+    <description>
+      <![CDATA[
+        Implement Social Meta Tags for Google+, Facebook and Twitter. <br>Make sure you <a href="index.php?option=com_plugins&view=plugins&filter_search=index.php?option=com_plugins&view=plugins&filter_search=Social%20Meta%20Tags">configure and publish</a> the Social Meta Tags System and User Plugin before you use it.<br>
+      ]]>
+    </description>
+    <element>pkg_socialmetatags</element>
+    <folder />
+    <client>0</client>
+    <infourl title="SocialMetaTags Package">https://github.com/hans2103/pkg_SocialMetaTags</infourl>
+
+    <downloads>
+      <downloadurl type="full" format="zip">https://github.com/hans2103/pkg_SocialMetaTags/archive/v1.4.7.3.zip</downloadurl>
+    </downloads>
+
+    <tags>
+      <tag>stable</tag>
+    </tags>
+
+    <section>updates</section>
+    <maintainer>hans2103</maintainer>
+    <maintainerurl>http://www.hkweb.nl</maintainerurl>
+
+    <targetplatform name="joomla" version="3.[0-9]" />
+  </update>
+  <update>
     <version>1.4.7.2</version>
     <name>SocialMetaTags Package</name>
     <description>
