@@ -285,6 +285,8 @@ class PlgSystemSocialmetatags extends JPlugin
 
 	private function _setSocialImage(&$article)
 	{
+		$basicimage = '';
+		
 		$images     = json_decode($article->images);
 		$basicimage = JURI::base() . $this->params->get('basicimage');
 
@@ -313,4 +315,3 @@ class PlgSystemSocialmetatags extends JPlugin
 		return $basicimage;
 	}
 }
-
