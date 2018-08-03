@@ -1,10 +1,12 @@
 <?php
 /**
- * @package     Plugin Social Meta Tags for Joomla! 3.4
- * @author      Hans Kuijpers
- * @copyright   (C) 2014 Hans Kuijpers - HKweb
- * @license     GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
-**/
+ * @package   SocialMetaTags
+ *
+ * @author    Hans Kuijpers (info@hkweb.nl)
+ * @copyright Copyright (C) 2014 - 2018 HKweb. All rights reserved.
+ * @license   GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ * @link      https://github.com/hans2103/pkg_SocialMetaTags
+ **/
 
 // No direct access.
 defined('_JEXEC') or die;
