@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.2" type="plugin" group="system" method="upgrade">
+<extension version="3.8" type="plugin" group="system" method="upgrade">
     <name>PLG_SYSTEM_SOCIALMETATAGS</name>
     <author>Hans Kuijpers</author>
-    <creationDate>April 2014</creationDate>
-    <copyright>Copyright (C) 2014 Hans Kuijpers</copyright>
+    <creationDate>August 2018</creationDate>
+    <copyright>Copyright (C) 2014 - 2018 Hans Kuijpers</copyright>
     <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
     <authorEmail>info@hkweb.nl</authorEmail>
-    <authorUrl>http://www.hkweb.nl/</authorUrl>
-    <version>1.4.8</version>
+    <authorUrl>https://github.com/hans2103/pkg_SocialMetaTags</authorUrl>
+    <version>1.4.9</version>
     <description>PLG_SYSTEM_SOCIALMETATAGS_DESC</description>
     <files>
         <filename plugin="socialmetatags">socialmetatags.php</filename>

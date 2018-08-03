@@ -2,14 +2,14 @@
 <extension type="package" version="3.2" method="upgrade">
   <name>SocialMetaTags Package</name>
   <author>Hans Kuijpers</author>
-  <creationDate>April 2014</creationDate>
+  <creationDate>August 2018</creationDate>
   <packagename>socialmetatags</packagename>
-  <version>1.4.8</version>
+  <version>1.4.9</version>
   <url>http://www.hkweb.nl/</url>
-  <copyright>Copyright (C) 2014 - Hans Kuijpers</copyright>
+  <copyright>Copyright (C) 2014 - 2018 Hans Kuijpers</copyright>
   <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
   <packager>Hans Kuijpers</packager>
-  <packagerurl>http://www.hkweb.nl/</packagerurl>
+  <packagerurl>https://github.com/hans2103/pkg_SocialMetaTags</packagerurl>
   <description>
     <![CDATA[
      Implement Social Meta Tags for Google+, Facebook and Twitter. <br>Make sure you <a href="index.php?option=com_plugins&view=plugins&filter_search=index.php?option=com_plugins&view=plugins&filter_search=Social%20Meta%20Tags">configure and publish</a> the Social Meta Tags System and User Plugin before you use it.<br>

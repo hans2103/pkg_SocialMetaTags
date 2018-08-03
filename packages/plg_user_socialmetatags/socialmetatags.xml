@@ -2,12 +2,12 @@
 <extension version="3.2" type="plugin" group="user" method="upgrade">
     <name>PLG_USER_SOCIALMETATAGS</name>
     <author>Hans Kuijpers</author>
-    <creationDate>April 2014</creationDate>
-    <copyright>Copyright (C) 2014 Hans Kuijpers</copyright>
+    <creationDate>August 20198</creationDate>
+    <copyright>Copyright (C) 2014 - 2018 Hans Kuijpers</copyright>
     <license>GPLv3 http://www.gnu.org/licenses/gpl.html</license>
     <authorEmail>info@hkweb.nl</authorEmail>
-    <authorUrl>http://www.hkweb.nl/</authorUrl>
-    <version>1.4.8</version>
+    <authorUrl>https://github.com/hans2103/pkg_SocialMetaTags</authorUrl>
+    <version>1.4.9</version>
     <description>PLG_USER_SOCIALMETATAGS_DESC</description>
 
     <files>
