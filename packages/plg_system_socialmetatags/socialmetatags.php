@@ -305,13 +305,29 @@ class PlgSystemSocialmetatags extends JPlugin
 		{
 			// Get img tag from article
 			preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->fulltext, $articleimages);
-			$basicimage = JURI::base() . $articleimages[2];
+
+			if (preg_match('/^https?/', $articleimages[2]) === 1)
+			{
+				$basicimage = $articleimages[2];
+			}
+			else
+			{
+				$basicimage = JURI::base() . $articleimages[2];
+			}
 		}
 		elseif (strpos($article->introtext, '<img') !== false)
 		{
 			// Get img tag from article
 			preg_match('/(?<!_)src=([\'"])?(.*?)\\1/', $article->introtext, $articleimages);
-			$basicimage = JURI::base() . $articleimages[2];
+
+			if (preg_match('/^https?/', $articleimages[2]) === 1)
+			{
+				$basicimage = $articleimages[2];
+			}
+			else
+			{
+				$basicimage = JURI::base() . $articleimages[2];
+			}
 		}
 
 		return $basicimage;
